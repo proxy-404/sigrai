@@ -127,7 +127,7 @@
       }
 
       function buildTable() {
-        // To-do #1 - Set and validate circle parameters r, x0 and y0
+        // TODO: #1 - Set and validate circle parameters r, x0 and y0
         //     - follow the example of parameter n below
 
         const n = validate("n"); // Number of points
@@ -147,19 +147,19 @@
           }
 
           // Create the output table
-          // To-do #2 - Set the values of the starting angle and angle increment (in radians)
+          // TODO: #2 - Set the values of the starting angle and angle increment (in radians)
 
           let startingAngle = 0;
           let angleIncrement = 2 * Math.PI / n; // hold up
 
-          /* To-do #3 - Set the for () loop parameters
+          /* TODO: #3 - Set the for () loop parameters
                 for (...) */ 
             for (let i = 1; i < n; i++) {
               let nextAngle = startingAngle + i * angleIncrement;
               let x = r * Math.cos(nextAngle) + x0;
               let y = r * Math.sin(nextAngle) + y0;
 
-              //   To-do #5 - Add the value of i (0, 1, 2, etc.) to the newly created cell contents
+              //   TODO: #5 - Add the value of i (0, 1, 2, etc.) to the newly created cell contents
               let row = output.insertRow(-1);
               let cell = row.insertCell(-1);
               cell.className = "output";
@@ -179,7 +179,7 @@
               cell.innerHTML = y.toFixed(4);
             }
 
-            /* To-do #4 - Compute the values of point coordinates x and y
+            /* TODO: #4 - Compute the values of point coordinates x and y
                         - use the parametric form of the circle equation to compute the points coordinates:
                             x = r * cos(t) + x0
                             y = r * sin(t) + y0
@@ -195,21 +195,21 @@
                     let row = output.insertRow(-1);
                     let cell = row.insertCell(-1);
                     cell.className = "output"; */
-            /* To-do #5 - Add the value of i (0, 1, 2, etc.) to the newly created cell contents
+            /* TODO: #5 - Add the value of i (0, 1, 2, etc.) to the newly created cell contents
                     cell.innerHTML = ...;
                     cell = row.insertCell(-1);
                     cell.className = "output"; */
-            /* To-do #6 - Add the value of angle (in degrees) to the newly created cell contents
+            /* TODO: #6 - Add the value of angle (in degrees) to the newly created cell contents
                     cell.innerHTML = ...toFixed(2);
                     cell = row.insertCell(-1);
                     cell.className = "output"; */
-            /* To-do #7 - Add the value of point coordinate x to the newly created cell contents
+            /* TODO: #7 - Add the value of point coordinate x to the newly created cell contents
                     cell.innerHTML = ...toFixed(4);
                     cell = row.insertCell(-1);
                     cell.className = "output"; */
-            /* To-do #8 - Add the value of point coordinate y to the newly created cell contents
+            /* TODO: #8 - Add the value of point coordinate y to the newly created cell contents
                     cell.innerHTML = ...toFixed(4); */
-            /* To-do #9 - Update the value of angle
+            /* TODO: #9 - Update the value of angle
                     ... */
           }
         }

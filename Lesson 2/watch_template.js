@@ -130,16 +130,38 @@ export default class Watch extends THREE.Group {
 
     this.handH = new THREE.Group();
 
-    points = [
-      new THREE.Vector2(0.0, 0.0),
-      new THREE.Vector2(0.5 * radius, 0.0),
-    ];
+    // points = [
+    //   new THREE.Vector2(0.0, 0.0),
+    //   new THREE.Vector2(0.5 * radius, 0.0),
+    // ];
 
-    geometry = new THREE.BufferGeometry().setFromPoints(points);
-    material = new THREE.LineBasicMaterial({ color: handsHMColor });
-    let handH = new THREE.LineSegments(geometry, material);
+    // geometry = new THREE.BufferGeometry().setFromPoints(points);
+    // material = new THREE.LineBasicMaterial({ color: handsHMColor });
+    // let handH = new THREE.LineSegments(geometry, material);
+    // this.handH.add(handH);
+    // this.add(this.handH);
+
+
+    points = new Float32Array( [
+      -1.0, -1.0,  0,
+      1.0, -1.0,  0,
+      1.0,  1.0,  0,
+   
+      1.0,  1.0,  0,
+     -1.0,  1.0,  0,
+     -1.0, -1.0,  0
+    ]);
+
+    geometry = new THREE.BufferGeometry();
+    geometry.setAttribute( 'position', new THREE.BufferAttribute( points, 3 ) );
+    // geometry = new THREE.BufferGeometry().setFromPoints(points, 3);
+    material = new THREE.MeshBasicMaterial({ color: handsHMColor });
+    let handH = new THREE.Line(geometry, material);
     this.handH.add(handH);
     this.add(this.handH);
+    console.log("🚀 ~ file: watch_template.js ~ line 155 ~ Watch ~ handH", handH)
+
+
 
     /* TODO: #4: Create the minute hand (a line segment) with length 0.7 * radius, pointing at 0.0 radians (the positive X-semiaxis) and color handsHMColor
         points = [...];
@@ -230,7 +252,7 @@ export default class Watch extends THREE.Group {
         angle = ...;
         this.handH.rotation.z = angle; */
 
-
+        
         // divide by number of hours
     angle = Math.PI / 2.0 - (2.0 * Math.PI * time[0]) / 12.0;
     this.handH.rotation.z = angle;
