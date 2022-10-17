@@ -107,11 +107,17 @@
             scene.add(pong);
         }
 
+        const fps = 15;
+
         function animate() {
-            requestAnimationFrame(animate);
-            // Update the game
-            pong.update();
-            renderer.render(scene, camera);
+
+            setTimeout(() => {
+                requestAnimationFrame(animate);
+                // Update the game
+                pong.update();
+                renderer.render(scene, camera);
+            }, 1000 / fps);
+
         }
 
         initialize();

@@ -55,8 +55,11 @@ export default class Ball extends THREE.Mesh {
         this.center.add(...); */
 
         const coveredDistance = this.speed * deltaT;
-        const x = coveredDistance * Math.cos(this.direction) + this.center.x;
-        const y = coveredDistance * Math.sin(this.direction) + this.center.y;
+        
+        const x = (coveredDistance * Math.cos(this.direction));
+        const y = (coveredDistance * Math.sin(this.direction));
+
+        
         const centerIncrement = new THREE.Vector2(x, y);
         this.center.add(centerIncrement);
 
@@ -81,6 +84,23 @@ export default class Ball extends THREE.Mesh {
             }
         } */
 
+        if (centerIncrement.x <= 0.0) { // if its negative it means the ball is moving to the left
+            if ((this.center.x - this.radius <= this.player1.center.x + this.player1.halfSize.x) &&
+                (this.center.y + this.radius >= this.player1.center.y - this.player1.halfSize.y) &&
+                (this.center.y - this.radius <= this.player1.center.y + this.player1.halfSize.y)
+                ) {
+                // The ball hit player 1 racket
+                // invert the radians
+
+
+
+                this.direction = Math.PI - this.direction;
+            }
+                
+            }
+
+
+
         /* TODO: #12 - Check if the ball hit player 2 racket
             - the hit depends on the ball direction (it must be moving to the right), ball position, ball radius, player 2 racket's position and dimension
             - more specifically, the hit depends on the following parameters:
@@ -99,6 +119,16 @@ export default class Ball extends THREE.Mesh {
             }
         } */
 
+        if (centerIncrement.x > 0.0) {
+            if ((this.center.x + this.radius >= this.player2.center.x - this.player2.halfSize.x) &&
+                (this.center.y + this.radius >= this.player2.center.y - this.player2.halfSize.y) &&
+                (this.center.y - this.radius <= this.player2.center.y + this.player2.halfSize.y)
+                ) {
+                // The ball hit player 2 racket
+                this.direction = Math.PI - this.direction;
+            }
+        }
+
         /* TODO: #10 - Check if the ball hit the sidelines
             - the hit depends on the ball direction (down or up), ball position, ball radius and table dimension
             - more specifically, the hit depends on the following parameters:
@@ -116,6 +146,19 @@ export default class Ball extends THREE.Mesh {
         }
         */
 
+        if ((centerIncrement.y < 0.0 && ((this.center.y - this.radius) <= -this.table.halfSize.y)) || 
+            (centerIncrement.y > 0.0 && ((this.center.y + this.radius) >= this.table.halfSize.y))
+            ) {
+            if (centerIncrement.x < 0.0) {
+                this.direction += 2.0 * Math.PI;
+            }
+            centerIncrement.y = -centerIncrement.y;
+            this.direction = -this.direction;
+            console.log("🚀 ~ file: ball_template.js ~ line 149 ~ Ball ~ update ~ centerIncrement.y", centerIncrement.y)
+            
+
+        }
+
 
 
 
@@ -125,6 +168,6 @@ export default class Ball extends THREE.Mesh {
 
         this.position.set(...); */
 
-        // this.position.set(this.center.x, this.center.y);
+        this.position.set(this.center.x, this.center.y);
     }
 }

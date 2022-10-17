@@ -263,6 +263,22 @@ export default class Pong extends THREE.Group {
                     this.displayScore();
                 } */
 
+                if (this.ball.center.x < -this.table.halfSize.x) { // Player 1 scored
+                    this.player1.score ++;
+                    this.ball.initialize();
+                    this.displayScore();
+                }
+                else if (this.ball.center.x > this.table.halfSize.x) { // Player 2 scored
+                    this.player2.score ++;
+                    this.ball.initialize();
+                    this.displayScore();
+                    this.ball.direction = Math.PI - this.ball.direction; // Reverse the ball direction
+                }
+
+
+
+
+
                 /* TODO: #15 - Check if the game is over
                     - the game ends when a player's score reaches a given threshold
                     - consider the following parameters:
@@ -276,6 +292,13 @@ export default class Pong extends THREE.Group {
                     this.gamePaused = true;
                     this.clock.stop();
                 } */
+
+                if (this.player1.score == this.gameParameters.end || this.player2.score == this.gameParameters.end) {
+                    this.ball.visible = false; // Make the ball invisible
+                    this.gameRunning = false;
+                    this.gamePaused = true;
+                    this.clock.stop();
+                }
             }
             else {
                 text += "<tr><td>Game paused</td></tr>";

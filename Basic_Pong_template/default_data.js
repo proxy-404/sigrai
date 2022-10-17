@@ -26,6 +26,6 @@ export const playerData = {
 export const ballData = {
     color: 0xffffff,
     radius: 0.025,
-    speed: 1.125,
+    speed: 0.5,
     directionMax: Math.PI / 3.0 // 60.0 degrees
 }
